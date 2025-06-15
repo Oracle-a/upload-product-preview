@@ -1,0 +1,67 @@
+
+  const stars = document.querySelectorAll(".star");
+  const commentInput = document.getElementById("review-comment");
+  const nameInput = document.getElementById("reviewer-name");
+  const submitBtn = document.getElementById("submit-review");
+  const reviewsContainer = document.getElementById("reviews-container");
+
+  let selectedRating = 0;
+
+  // Highlight stars on click
+  stars.forEach((star) => {
+    star.addEventListener("click", () => {
+      selectedRating = parseInt(star.getAttribute("data-rating"));
+      updateStarStyles();
+    });
+  });
+
+  function updateStarStyles() {
+    stars.forEach((star) => {
+      const rating = parseInt(star.getAttribute("data-rating"));
+      star.style.color = rating <= selectedRating ? "#f59e0b" : "#d1d5db";
+    });
+  }
+
+  // Load reviews from localStorage
+  function loadReviews() {
+    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+    reviewsContainer.innerHTML = "";
+    reviews.forEach((review) => {
+      const reviewEl = document.createElement("div");
+      reviewEl.classList.add("border", "p-3", "mb-3", "rounded", "bg-gray-50");
+
+      reviewEl.innerHTML = `
+        <p class="font-semibold">${review.name} - <span class="text-yellow-500">${"★".repeat(review.rating)}</span></p>
+        <p>${review.comment}</p>
+      `;
+      reviewsContainer.appendChild(reviewEl);
+    });
+  }
+
+  // Submit review
+  submitBtn.addEventListener("click", () => {
+    const name = nameInput.value.trim();
+    const comment = commentInput.value.trim();
+
+    if (!name || !comment || selectedRating === 0) {
+      alert("Please fill in all fields and select a rating.");
+      return;
+    }
+
+    const newReview = { name, rating: selectedRating, comment };
+
+    const existingReviews = JSON.parse(localStorage.getItem("reviews")) || [];
+    existingReviews.push(newReview);
+    localStorage.setItem("reviews", JSON.stringify(existingReviews));
+
+    // Reset form
+    nameInput.value = "";
+    commentInput.value = "";
+    selectedRating = 0;
+    updateStarStyles();
+
+    loadReviews();
+  });
+
+  // Initial load
+  loadReviews();

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rating and Review</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+<body>
+  <div class="rating-system max-w-md mx-auto p-6 bg-white rounded-2xl shadow-md border border-gray-100 justify-center mt-6">
+    <div class="reviews-container mt-6 space-y-4 mb-6" id="reviews-container"></div>
+  <h2 class="text-xl font-semibold text-green-700 mb-4 text-center">Leave a Review</h2>
+ <div class="rating-stars flex justify-center mb-4 text-2xl">
+    <span class="star cursor-pointer text-gray-400" data-rating="1">&#9733;</span>
+    <span class="star cursor-pointer text-gray-400" data-rating="2">&#9733;</span>
+    <span class="star cursor-pointer text-gray-400" data-rating="3">&#9733;</span>
+    <span class="star cursor-pointer text-gray-400" data-rating="4">&#9733;</span>
+    <span class="star cursor-pointer text-gray-400" data-rating="5">&#9733;</span>
+  </div>
+
+  <input id="reviewer-name" type="text" placeholder="Your name"
+    class="w-full p-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" />
+
+  <textarea id="review-comment" rows="4" placeholder="Write a review..."
+    class="w-full p-2 mb-4 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
+
+  <button id="submit-review"
+    class="bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg w-full">Submit Review</button>
+</div>
+
+
+<script src="../rating and review/rating-review.js"></script>
+  
+</body>
+</html>
